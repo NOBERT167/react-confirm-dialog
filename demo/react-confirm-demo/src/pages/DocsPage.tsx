@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { ArrowLeft, Package, Github, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
