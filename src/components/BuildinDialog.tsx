@@ -1,5 +1,20 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { ConfirmDialogState, ConfirmDialogProviderProps } from "../types";
+
+function usePrefersDark(): boolean {
+  const [dark, setDark] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+      : false,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e: MediaQueryListEvent) => setDark(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return dark;
+}
 
 const VARIANT_STYLES = {
   default: {
@@ -7,28 +22,36 @@ const VARIANT_STYLES = {
     confirmColor: "#fff",
     confirmHover: "#333",
     accentColor: "#111",
+    accentColorDark: "#e5e5e5",
     iconBg: "#f4f4f4",
+    iconBgDark: "#2c2c2e",
   },
   danger: {
     confirmBg: "#dc2626",
     confirmColor: "#fff",
     confirmHover: "#b91c1c",
     accentColor: "#dc2626",
+    accentColorDark: "#f87171",
     iconBg: "#fef2f2",
+    iconBgDark: "#3b1114",
   },
   warning: {
     confirmBg: "#d97706",
     confirmColor: "#fff",
     confirmHover: "#b45309",
     accentColor: "#d97706",
+    accentColorDark: "#fbbf24",
     iconBg: "#fffbeb",
+    iconBgDark: "#3b2a0a",
   },
   success: {
     confirmBg: "#16a34a",
     confirmColor: "#fff",
     confirmHover: "#15803d",
     accentColor: "#16a34a",
+    accentColorDark: "#4ade80",
     iconBg: "#f0fdf4",
+    iconBgDark: "#0a2e1a",
   },
 };
 
@@ -136,6 +159,7 @@ export function BuiltInDialog({
   isClosing,
 }: BuiltInDialogProps) {
   const confirmRef = useRef<HTMLButtonElement>(null);
+  const isDark = usePrefersDark();
   const variant = state.variant ?? "default";
   const v = VARIANT_STYLES[variant];
 
@@ -163,7 +187,7 @@ export function BuiltInDialog({
   const overlayStyle: React.CSSProperties = {
     position: "fixed",
     inset: 0,
-    background: "rgba(0,0,0,0.45)",
+    background: isDark ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.45)",
     backdropFilter: "blur(4px)",
     WebkitBackdropFilter: "blur(4px)",
     display: "flex",
@@ -176,12 +200,15 @@ export function BuiltInDialog({
   };
 
   const dialogStyle: React.CSSProperties = {
-    background: "#fff",
+    background: isDark ? "#1c1c1e" : "#fff",
     borderRadius: "16px",
     padding: "28px",
     maxWidth: "420px",
     width: "100%",
-    boxShadow: "0 24px 64px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.08)",
+    boxShadow: isDark
+      ? "0 24px 64px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3)"
+      : "0 24px 64px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.08)",
+    border: isDark ? "1px solid rgba(255,255,255,0.08)" : "none",
     position: "relative",
     animation: `rcd-dialog-${animationState} 220ms cubic-bezier(0.34,1.56,0.64,1) forwards`,
     ...providerProps.styles?.dialog,
@@ -191,8 +218,8 @@ export function BuiltInDialog({
     width: 48,
     height: 48,
     borderRadius: "12px",
-    background: v.iconBg,
-    color: v.accentColor,
+    background: isDark ? v.iconBgDark : v.iconBg,
+    color: isDark ? v.accentColorDark : v.accentColor,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -204,7 +231,7 @@ export function BuiltInDialog({
     margin: "0 0 6px 0",
     fontSize: "17px",
     fontWeight: 700,
-    color: "#0f0f0f",
+    color: isDark ? "#f5f5f5" : "#0f0f0f",
     lineHeight: 1.3,
     letterSpacing: "-0.02em",
     fontFamily: "inherit",
@@ -214,7 +241,7 @@ export function BuiltInDialog({
   const messageStyle: React.CSSProperties = {
     margin: "0 0 24px 0",
     fontSize: "14px",
-    color: "#6b7280",
+    color: isDark ? "#a1a1aa" : "#6b7280",
     lineHeight: 1.6,
     fontFamily: "inherit",
     ...providerProps.styles?.message,
@@ -227,12 +254,13 @@ export function BuiltInDialog({
     ...providerProps.styles?.actions,
   };
 
+  const cancelBg = isDark ? "#2c2c2e" : "#fff";
   const cancelStyle: React.CSSProperties = {
     padding: "9px 18px",
     borderRadius: "9px",
-    border: "1.5px solid #e5e7eb",
-    background: "#fff",
-    color: "#374151",
+    border: isDark ? "1.5px solid #3a3a3c" : "1.5px solid #e5e7eb",
+    background: cancelBg,
+    color: isDark ? "#e5e5e5" : "#374151",
     fontSize: "14px",
     fontWeight: 500,
     cursor: "pointer",
@@ -299,12 +327,14 @@ export function BuiltInDialog({
               className={providerProps.classNames?.cancelButton}
               onClick={onCancel}
               onMouseEnter={(e) => {
-                (e.target as HTMLButtonElement).style.background = "#f9fafb";
+                (e.target as HTMLButtonElement).style.background = isDark
+                  ? "#3a3a3c"
+                  : "#f9fafb";
               }}
               onMouseLeave={(e) => {
                 (e.target as HTMLButtonElement).style.background =
                   providerProps.styles?.cancelButton?.background?.toString() ??
-                  "#fff";
+                  cancelBg;
               }}
             >
               {state.cancelText ?? "Cancel"}

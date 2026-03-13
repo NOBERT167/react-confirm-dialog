@@ -2,7 +2,9 @@
 
 A lightweight, fully customizable confirmation dialog hook — `useConfirm()` — that replaces `window.confirm()` with beautiful async modals.
 
-**Zero runtime dependencies. ~2KB gzipped. Full TypeScript support.**
+**Zero runtime dependencies. ~2KB gzipped. Full TypeScript support. Auto dark mode.**
+
+📺 **[Live Demo](https://react-confirm-dialog.vercel.app/)** · 📖 **[Documentation](https://react-confirm-dialog.vercel.app/docs)** · 💻 **[GitHub](https://github.com/NOBERT167/react-confirm-dialog)**
 
 ---
 
@@ -10,6 +12,7 @@ A lightweight, fully customizable confirmation dialog hook — `useConfirm()` �
 
 - ✅ Drop-in async replacement for `window.confirm()`
 - 🎨 Four built-in variants: `default`, `danger`, `warning`, `success`
+- 🌗 Auto dark mode — adapts to `prefers-color-scheme` automatically
 - 🧩 Fully customizable via props, classNames, styles, or `renderDialog`
 - ⌨️ Keyboard accessible (Escape to cancel, auto-focus confirm)
 - 🖱️ Click outside to dismiss
@@ -198,6 +201,17 @@ await confirm({ title: "Publish post?", variant: "success" });
   }}
 >
 ```
+
+---
+
+## Dark Mode
+
+The built-in dialog **automatically adapts** to the user's system color scheme via `prefers-color-scheme: dark`. No configuration needed — it just works.
+
+- Light mode: White dialog, light icon backgrounds, subtle shadows
+- Dark mode: Dark gray dialog, muted icon backgrounds, deeper shadows
+
+If you use `renderDialog` or custom `styles`, you have full control over theming.
 
 ---
 
