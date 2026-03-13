@@ -5,7 +5,7 @@ import { CodeBlock } from "@/components/ui/CodeBlock";
 import { ArrowLeft, Package, Github, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
-const GITHUB_URL = "https://github.com/yourusername/react-confirm-dialog";
+const GITHUB_URL = "https://github.com/NOBERT167/react-confirm-dialog";
 
 function Sidebar() {
   const sections = [
@@ -89,7 +89,7 @@ export default function DocsPage() {
         <div className="max-w-6xl mx-auto flex h-14 items-center px-4">
           <Link to="/" className="flex items-center gap-2 font-semibold">
             <Package className="h-5 w-5" />
-            react-confirm-dialog
+            @nobertdev/react-confirm-dialog
           </Link>
           <nav className="ml-auto flex items-center gap-4 text-sm">
             <Link
@@ -126,8 +126,8 @@ export default function DocsPage() {
               Documentation
             </h1>
             <p className="text-muted-foreground">
-              Everything you need to integrate react-confirm-dialog into your
-              project.
+              Everything you need to integrate @nobertdev/react-confirm-dialog
+              into your project.
             </p>
           </div>
 
@@ -137,16 +137,19 @@ export default function DocsPage() {
               Install via your preferred package manager:
             </p>
             <CodeBlock
-              code="npm install react-confirm-dialog"
+              code="npm install @nobertdev/react-confirm-dialog"
               language="bash"
               className="mb-3"
             />
             <CodeBlock
-              code="yarn add react-confirm-dialog"
+              code="yarn add @nobertdev/react-confirm-dialog"
               language="bash"
               className="mb-3"
             />
-            <CodeBlock code="pnpm add react-confirm-dialog" language="bash" />
+            <CodeBlock
+              code="pnpm add @nobertdev/react-confirm-dialog"
+              language="bash"
+            />
             <div className="mt-4 p-4 bg-muted rounded-lg text-sm">
               <strong>Peer dependencies:</strong> React ≥ 17.0.0 and ReactDOM ≥
               17.0.0
@@ -161,7 +164,7 @@ export default function DocsPage() {
             </p>
             <p className="text-sm font-medium mb-2">1. Add the provider</p>
             <CodeBlock
-              code={`import { ConfirmDialogProvider } from "react-confirm-dialog";
+              code={`import { ConfirmDialogProvider } from "@nobertdev/react-confirm-dialog";
 
 function App() {
   return (
@@ -174,7 +177,7 @@ function App() {
             />
             <p className="text-sm font-medium mb-2">2. Use the hook</p>
             <CodeBlock
-              code={`import { useConfirm } from "react-confirm-dialog";
+              code={`import { useConfirm } from "@nobertdev/react-confirm-dialog";
 
 function MyComponent() {
   const confirm = useConfirm();
@@ -443,8 +446,8 @@ const ok = await confirm({
               . You receive everything you need as props:
             </p>
             <CodeBlock
-              code={`import { ConfirmDialogProvider } from "react-confirm-dialog";
-import type { RenderDialogProps } from "react-confirm-dialog";
+              code={`import { ConfirmDialogProvider } from "@nobertdev/react-confirm-dialog";
+import type { RenderDialogProps } from "@nobertdev/react-confirm-dialog";
 
 function MyDialog({ isOpen, options, onConfirm, onCancel }: RenderDialogProps) {
   if (!isOpen) return null;
@@ -591,7 +594,7 @@ await confirm({ variant: "success", title: "Publish article?" });`}
   ConfirmOptions,
   ConfirmDialogProviderProps,
   RenderDialogProps,
-} from "react-confirm-dialog";`}
+} from "@nobertdev/react-confirm-dialog";`}
               className="mb-4"
             />
             <CodeBlock
@@ -632,7 +635,7 @@ interface ConfirmDialogProviderProps {
               </Button>
             </a>
             <a
-              href="https://www.npmjs.com/package/react-confirm-dialog"
+              href="https://www.npmjs.com/package/@nobertdev/react-confirm-dialog"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -651,7 +654,7 @@ interface ConfirmDialogProviderProps {
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Package className="h-4 w-4" />
-            react-confirm-dialog · MIT
+            @nobertdev/react-confirm-dialog · MIT
           </div>
           <Link to="/" className="hover:text-foreground transition-colors">
             ← Back to home

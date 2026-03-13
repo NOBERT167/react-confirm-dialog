@@ -18,7 +18,7 @@ export function useConfirm(): (
   const ctx = useContext(ConfirmDialogContext);
   if (!ctx) {
     throw new Error(
-      "[react-confirm-dialog] useConfirm() must be used inside <ConfirmDialogProvider>.",
+      "[@nobertdev/react-confirm-dialog] useConfirm() must be used inside <ConfirmDialogProvider>.",
     );
   }
   return ctx.confirm;

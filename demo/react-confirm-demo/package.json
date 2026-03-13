@@ -10,12 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nobertdev/react-confirm-dialog": "^1.0.0",
     "@tailwindcss/vite": "^4.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",
-    "react-confirm-dialog": "file:../../react-confirm-dialog-1.0.0.tgz",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.1",
     "tailwind-merge": "^3.5.0",

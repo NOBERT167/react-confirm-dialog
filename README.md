@@ -1,4 +1,4 @@
-# react-confirm-dialog
+# @nobertdev/react-confirm-dialog
 
 A lightweight, fully customizable confirmation dialog hook — `useConfirm()` — that replaces `window.confirm()` with beautiful async modals.
 
@@ -24,11 +24,11 @@ A lightweight, fully customizable confirmation dialog hook — `useConfirm()` �
 ## Installation
 
 ```bash
-npm install react-confirm-dialog
+npm install @nobertdev/react-confirm-dialog
 # or
-yarn add react-confirm-dialog
+yarn add @nobertdev/react-confirm-dialog
 # or
-pnpm add react-confirm-dialog
+pnpm add @nobertdev/react-confirm-dialog
 ```
 
 ---
@@ -39,7 +39,7 @@ pnpm add react-confirm-dialog
 
 ```tsx
 // main.tsx / _app.tsx
-import { ConfirmDialogProvider } from "react-confirm-dialog";
+import { ConfirmDialogProvider } from "@nobertdev/react-confirm-dialog";
 
 function App() {
   return (
@@ -53,7 +53,7 @@ function App() {
 **2. Use `useConfirm()` anywhere in your tree:**
 
 ```tsx
-import { useConfirm } from "react-confirm-dialog";
+import { useConfirm } from "@nobertdev/react-confirm-dialog";
 
 function DeleteButton() {
   const confirm = useConfirm();
@@ -216,7 +216,7 @@ import type {
   ConfirmOptions,
   ConfirmDialogProviderProps,
   RenderDialogProps,
-} from "react-confirm-dialog";
+} from "@nobertdev/react-confirm-dialog";
 ```
 
 ---

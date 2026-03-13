@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useConfirm } from "react-confirm-dialog";
+import { useConfirm } from "@nobertdev/react-confirm-dialog";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import {
@@ -30,7 +30,7 @@ import {
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useState } from "react";
 
-const GITHUB_URL = "https://github.com/yourusername/react-confirm-dialog";
+const GITHUB_URL = "https://github.com/NOBERT167/react-confirm-dialog";
 
 function Navbar() {
   return (
@@ -38,7 +38,7 @@ function Navbar() {
       <div className="max-w-6xl mx-auto flex h-14 items-center px-4">
         <Link to="/" className="flex items-center gap-2 font-semibold">
           <Package className="h-5 w-5" />
-          react-confirm-dialog
+          @nobertdev/react-confirm-dialog
         </Link>
         <nav className="ml-auto flex items-center gap-4 text-sm">
           <a
@@ -115,7 +115,7 @@ function HeroSection() {
         </div>
         <div className="mt-12 max-w-lg mx-auto">
           <CodeBlock
-            code={`npm install react-confirm-dialog`}
+            code={`npm install @nobertdev/react-confirm-dialog`}
             language="bash"
           />
         </div>
@@ -363,7 +363,7 @@ function ExamplesSection() {
               value: "setup",
               content: (
                 <CodeBlock
-                  code={`import { ConfirmDialogProvider } from "react-confirm-dialog";
+                  code={`import { ConfirmDialogProvider } from "@nobertdev/react-confirm-dialog";
 
 function App() {
   return (
@@ -380,7 +380,7 @@ function App() {
               value: "basic",
               content: (
                 <CodeBlock
-                  code={`import { useConfirm } from "react-confirm-dialog";
+                  code={`import { useConfirm } from "@nobertdev/react-confirm-dialog";
 
 function DeleteButton() {
   const confirm = useConfirm();
@@ -490,7 +490,8 @@ function RealWorldSection() {
             Common Use Cases
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            See how react-confirm-dialog fits into real application flows.
+            See how @nobertdev/react-confirm-dialog fits into real application
+            flows.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
@@ -533,7 +534,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Package className="h-4 w-4" />
-          react-confirm-dialog
+          @nobertdev/react-confirm-dialog
           <span>·</span>
           <span>MIT License</span>
         </div>
@@ -553,7 +554,7 @@ function Footer() {
             GitHub
           </a>
           <a
-            href="https://www.npmjs.com/package/react-confirm-dialog"
+            href="https://www.npmjs.com/package/@nobertdev/react-confirm-dialog"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"

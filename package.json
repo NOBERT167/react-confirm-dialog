@@ -1,5 +1,5 @@
 {
-  "name": "react-confirm-dialog",
+  "name": "@nobertdev/react-confirm-dialog",
   "version": "1.0.0",
   "description": "A lightweight, fully customizable confirmation dialog hook (useConfirm()) that replaces window.confirm() with beautiful async modals. Zero dependencies.",
   "keywords": [
@@ -39,10 +39,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/react-confirm-dialog.git"
+    "url": "https://github.com/NOBERT167/react-confirm-dialog.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/react-confirm-dialog/issues"
+    "url": "https://github.com/NOBERT167/react-confirm-dialog/issues"
   },
-  "homepage": "https://github.com/yourusername/react-confirm-dialog#readme"
+  "homepage": "https://github.com/NOBERT167/react-confirm-dialog#readme"
 }
