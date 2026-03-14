@@ -21,18 +21,50 @@ const DEFAULT_STATE: ConfirmDialogState = {
   icon: undefined,
 };
 
+function detectDarkFromDOM(): boolean | null {
+  if (typeof document === "undefined") return null;
+  const el = document.documentElement;
+  if (el.classList.contains("dark")) return true;
+  if (el.classList.contains("light")) return false;
+  const dataTheme =
+    el.getAttribute("data-theme") ?? el.getAttribute("data-mode");
+  if (dataTheme === "dark") return true;
+  if (dataTheme === "light") return false;
+  return null;
+}
+
 function usePrefersDark(): boolean {
-  const [dark, setDark] = useState(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(prefers-color-scheme: dark)").matches
-      : false,
-  );
+  const [dark, setDark] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const domDark = detectDarkFromDOM();
+    if (domDark !== null) return domDark;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+
   useEffect(() => {
+    // Watch for class / attribute changes on <html>
+    const observer = new MutationObserver(() => {
+      const domDark = detectDarkFromDOM();
+      if (domDark !== null) setDark(domDark);
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "data-theme", "data-mode"],
+    });
+
+    // Fall back to OS-level media query
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = (e: MediaQueryListEvent) => setDark(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const mqHandler = (e: MediaQueryListEvent) => {
+      if (detectDarkFromDOM() === null) setDark(e.matches);
+    };
+    mq.addEventListener("change", mqHandler);
+
+    return () => {
+      observer.disconnect();
+      mq.removeEventListener("change", mqHandler);
+    };
   }, []);
+
   return dark;
 }
 
