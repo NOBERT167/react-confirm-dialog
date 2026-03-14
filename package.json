@@ -1,6 +1,6 @@
 {
   "name": "@nobertdev/react-confirm-dialog",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "A lightweight, fully customizable confirmation dialog hook (useConfirm()) that replaces window.confirm() with beautiful async modals. Zero dependencies.",
   "keywords": [
     "react",

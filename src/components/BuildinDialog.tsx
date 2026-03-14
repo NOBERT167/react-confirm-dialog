@@ -149,6 +149,7 @@ interface BuiltInDialogProps {
   onConfirm: () => void;
   onCancel: () => void;
   isClosing: boolean;
+  isDark: boolean;
 }
 
 export function BuiltInDialog({
@@ -157,9 +158,9 @@ export function BuiltInDialog({
   onConfirm,
   onCancel,
   isClosing,
+  isDark,
 }: BuiltInDialogProps) {
   const confirmRef = useRef<HTMLButtonElement>(null);
-  const isDark = usePrefersDark();
   const variant = state.variant ?? "default";
   const v = VARIANT_STYLES[variant];
 

@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useMemo } from "react";
+import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { BuiltInDialog } from "../components/BuildinDialog";
 import type {
@@ -21,6 +21,21 @@ const DEFAULT_STATE: ConfirmDialogState = {
   icon: undefined,
 };
 
+function usePrefersDark(): boolean {
+  const [dark, setDark] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+      : false,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e: MediaQueryListEvent) => setDark(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return dark;
+}
+
 /**
  * ConfirmDialogProvider
  *
@@ -41,6 +56,7 @@ export function ConfirmDialogProvider({
   const [state, setState] = useState<ConfirmDialogState>(DEFAULT_STATE);
   const [isClosing, setIsClosing] = useState(false);
   const resolveRef = useRef<((value: boolean) => void) | null>(null);
+  const isDark = usePrefersDark();
 
   const close = useCallback((result: boolean) => {
     setIsClosing(true);
@@ -91,6 +107,7 @@ export function ConfirmDialogProvider({
       onConfirm={onConfirm}
       onCancel={onCancel}
       isClosing={isClosing}
+      isDark={isDark}
     />
   );
 
