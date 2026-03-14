@@ -31,18 +31,26 @@ import {
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useState } from "react";
 import { useConfirm } from "@nobertdev/react-confirm-dialog";
+import { Menu, X } from "lucide-react";
 
 const GITHUB_URL = "https://github.com/NOBERT167/react-confirm-dialog";
 
 function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-6xl mx-auto flex h-14 items-center px-4">
         <Link to="/" className="flex items-center gap-2 font-semibold">
           <Package className="h-5 w-5" />
-          @nobertdev/react-confirm-dialog
+          <span className="hidden sm:inline">
+            @nobertdev/react-confirm-dialog
+          </span>
+          <span className="sm:hidden">react-confirm-dialog</span>
         </Link>
-        <nav className="ml-auto flex items-center gap-4 text-sm">
+
+        {/* Desktop nav */}
+        <nav className="ml-auto hidden md:flex items-center gap-4 text-sm">
           <a
             href="#demo"
             className="text-muted-foreground hover:text-foreground transition-colors"
@@ -75,7 +83,64 @@ function Navbar() {
           </a>
           <ThemeToggle />
         </nav>
+
+        {/* Mobile controls */}
+        <div className="ml-auto flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <nav className="md:hidden border-t bg-background px-4 py-3 space-y-3 text-sm">
+          <a
+            href="#demo"
+            className="block text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMobileOpen(false)}
+          >
+            Demo
+          </a>
+          <a
+            href="#features"
+            className="block text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMobileOpen(false)}
+          >
+            Features
+          </a>
+          <a
+            href="#examples"
+            className="block text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMobileOpen(false)}
+          >
+            Examples
+          </a>
+          <Link
+            to="/docs"
+            className="block text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMobileOpen(false)}
+          >
+            Docs
+          </Link>
+          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="sm" className="w-full">
+              <Github className="h-4 w-4" />
+              GitHub
+            </Button>
+          </a>
+        </nav>
+      )}
     </header>
   );
 }
@@ -101,15 +166,15 @@ function HeroSection() {
           with beautiful async modals. Promise-based API, keyboard accessible,
           auto dark mode, zero dependencies.
         </p>
-        <div className="flex items-center justify-center gap-4">
-          <a href="#demo">
-            <Button size="lg">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#demo" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-auto">
               Try Live Demo
               <ArrowRight className="h-4 w-4" />
             </Button>
           </a>
-          <Link to="/docs">
-            <Button variant="outline" size="lg">
+          <Link to="/docs" className="w-full sm:w-auto">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
               <BookOpen className="h-4 w-4" />
               Read Docs
             </Button>
@@ -522,7 +587,7 @@ function RealWorldSection() {
         </div>
         {log.length > 0 && (
           <div className="mt-6 max-w-md mx-auto">
-            <div className="rounded-lg border bg-zinc-950 text-zinc-200 p-4 text-sm font-mono space-y-1">
+            <div className="rounded-lg border bg-zinc-950 dark:bg-zinc-950 text-zinc-200 p-4 text-sm font-mono space-y-1">
               {log.map((entry, i) => (
                 <div key={i} className="text-zinc-400">
                   <span className="text-zinc-500">→</span> {entry}

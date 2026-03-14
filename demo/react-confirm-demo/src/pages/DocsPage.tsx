@@ -1,31 +1,39 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { CodeBlock } from "@/components/ui/CodeBlock";
-import { ArrowLeft, Package, Github, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  Package,
+  Github,
+  ExternalLink,
+  Menu,
+  X,
+} from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { useState } from "react";
 
 const GITHUB_URL = "https://github.com/NOBERT167/react-confirm-dialog";
 
-function Sidebar() {
-  const sections = [
-    { id: "installation", label: "Installation" },
-    { id: "quick-start", label: "Quick Start" },
-    { id: "useconfirm", label: "useConfirm" },
-    { id: "confirm-options", label: "ConfirmOptions" },
-    { id: "provider-props", label: "Provider Props" },
-    { id: "classnames", label: "Custom ClassNames" },
-    { id: "styles", label: "Custom Styles" },
-    { id: "custom-dialog", label: "Custom Dialog" },
-    { id: "variants", label: "Variants" },
-    { id: "dark-mode", label: "Dark Mode" },
-    { id: "typescript", label: "TypeScript" },
-  ];
+const DOC_SECTIONS = [
+  { id: "installation", label: "Installation" },
+  { id: "quick-start", label: "Quick Start" },
+  { id: "useconfirm", label: "useConfirm" },
+  { id: "confirm-options", label: "ConfirmOptions" },
+  { id: "provider-props", label: "Provider Props" },
+  { id: "classnames", label: "Custom ClassNames" },
+  { id: "styles", label: "Custom Styles" },
+  { id: "custom-dialog", label: "Custom Dialog" },
+  { id: "variants", label: "Variants" },
+  { id: "dark-mode", label: "Dark Mode" },
+  { id: "typescript", label: "TypeScript" },
+];
 
+function Sidebar() {
   return (
     <aside className="hidden lg:block w-56 shrink-0">
       <div className="sticky top-20 space-y-1">
         <p className="text-sm font-semibold mb-3">On this page</p>
-        {sections.map((s) => (
+        {DOC_SECTIONS.map((s) => (
           <a
             key={s.id}
             href={`#${s.id}`}
@@ -36,6 +44,55 @@ function Sidebar() {
         ))}
       </div>
     </aside>
+  );
+}
+
+function MobileDocMenu() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setOpen(!open)}
+        aria-label="Toggle menu"
+      >
+        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </Button>
+      {open && (
+        <div className="absolute top-14 left-0 right-0 border-b bg-background px-4 py-3 space-y-2 text-sm z-40">
+          <Link
+            to="/"
+            className="block text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setOpen(false)}
+          >
+            Home
+          </Link>
+          <hr className="border-border" />
+          <p className="text-xs font-semibold text-muted-foreground pt-1">
+            On this page
+          </p>
+          {DOC_SECTIONS.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className="block text-muted-foreground hover:text-foreground transition-colors py-0.5"
+              onClick={() => setOpen(false)}
+            >
+              {s.label}
+            </a>
+          ))}
+          <hr className="border-border" />
+          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="sm" className="w-full mt-1">
+              <Github className="h-4 w-4" />
+              GitHub
+            </Button>
+          </a>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -89,9 +146,12 @@ export default function DocsPage() {
         <div className="max-w-6xl mx-auto flex h-14 items-center px-4">
           <Link to="/" className="flex items-center gap-2 font-semibold">
             <Package className="h-5 w-5" />
-            @nobertdev/react-confirm-dialog
+            <span className="hidden sm:inline">
+              @nobertdev/react-confirm-dialog
+            </span>
+            <span className="sm:hidden">react-confirm-dialog</span>
           </Link>
-          <nav className="ml-auto flex items-center gap-4 text-sm">
+          <nav className="ml-auto hidden md:flex items-center gap-4 text-sm">
             <Link
               to="/"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -106,6 +166,10 @@ export default function DocsPage() {
             </a>
             <ThemeToggle />
           </nav>
+          <div className="ml-auto flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <MobileDocMenu />
+          </div>
         </div>
       </header>
 
@@ -696,7 +760,7 @@ interface ConfirmDialogProviderProps {
 
       {/* Footer */}
       <footer className="border-t py-6 mt-10">
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between text-sm text-muted-foreground">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Package className="h-4 w-4" />
             @nobertdev/react-confirm-dialog · MIT
