@@ -17,6 +17,7 @@ function Sidebar() {
     { id: "styles", label: "Custom Styles" },
     { id: "custom-dialog", label: "Custom Dialog" },
     { id: "variants", label: "Variants" },
+    { id: "dark-mode", label: "Dark Mode" },
     { id: "typescript", label: "TypeScript" },
   ];
 
@@ -581,6 +582,51 @@ await confirm({ variant: "warning", title: "Discard changes?" });
 // Success — for positive confirmations
 await confirm({ variant: "success", title: "Publish article?" });`}
             />
+          </Section>
+
+          {/* Dark Mode */}
+          <Section id="dark-mode" title="Dark Mode">
+            <p className="text-muted-foreground mb-4">
+              The built-in dialog <strong>automatically adapts</strong> to the
+              user's system color scheme via{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                prefers-color-scheme: dark
+              </code>
+              . No configuration needed — it just works.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="rounded-lg border p-4 bg-white text-zinc-900">
+                <div className="text-sm font-medium mb-1">☀️ Light Mode</div>
+                <p className="text-xs text-zinc-500">
+                  White dialog, light icon backgrounds, subtle shadows
+                </p>
+              </div>
+              <div className="rounded-lg border border-zinc-700 p-4 bg-zinc-900 text-zinc-100">
+                <div className="text-sm font-medium mb-1">🌙 Dark Mode</div>
+                <p className="text-xs text-zinc-400">
+                  Dark gray dialog, muted icon backgrounds, deeper shadows
+                </p>
+              </div>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              The dialog listens to{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                window.matchMedia("(prefers-color-scheme: dark)")
+              </code>{" "}
+              and reacts to live changes — if the user toggles their system
+              theme, the dialog updates instantly.
+            </p>
+            <p className="text-muted-foreground mb-4">
+              If you use{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                renderDialog
+              </code>{" "}
+              or custom{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                styles
+              </code>
+              , you have full control over theming.
+            </p>
           </Section>
 
           {/* TypeScript */}

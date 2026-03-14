@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useConfirm } from "@nobertdev/react-confirm-dialog";
+// import { useConfirm } from "@nobertdev/react-confirm-dialog";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import {
@@ -26,9 +26,11 @@ import {
   Send,
   AlertTriangle,
   CheckCircle,
+  Moon,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useState } from "react";
+import { useConfirm } from "@nobertdev/react-confirm-dialog";
 
 const GITHUB_URL = "https://github.com/NOBERT167/react-confirm-dialog";
 
@@ -83,7 +85,7 @@ function HeroSection() {
     <section className="py-20 md:py-32">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <Badge variant="secondary" className="mb-4">
-          v1.0 — Zero Dependencies
+          v1.0 — Zero Dependencies · Auto Dark Mode
         </Badge>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
           Beautiful Confirm Dialogs
@@ -97,7 +99,7 @@ function HeroSection() {
             window.confirm()
           </code>{" "}
           with beautiful async modals. Promise-based API, keyboard accessible,
-          zero dependencies.
+          auto dark mode, zero dependencies.
         </p>
         <div className="flex items-center justify-center gap-4">
           <a href="#demo">
@@ -291,6 +293,12 @@ function FeaturesSection() {
       title: "4 Built-in Variants",
       description:
         "Default, danger, warning, and success variants with matching icons and colors.",
+    },
+    {
+      icon: Moon,
+      title: "Auto Dark Mode",
+      description:
+        "Automatically adapts to the user's system color scheme. No configuration needed.",
     },
     {
       icon: Keyboard,
