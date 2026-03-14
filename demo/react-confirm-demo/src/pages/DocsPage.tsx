@@ -11,8 +11,10 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useState } from "react";
+import bmcButton from "@/assets/bmc-button.png";
 
 const GITHUB_URL = "https://github.com/NOBERT167/react-confirm-dialog";
+const BMC_URL = "https://www.buymeacoffee.com/nobertdev";
 
 const DOC_SECTIONS = [
   { id: "installation", label: "Installation" },
@@ -753,6 +755,9 @@ interface ConfirmDialogProviderProps {
                 View on npm
                 <ExternalLink className="h-3 w-3" />
               </Button>
+            </a>
+            <a href={BMC_URL} target="_blank" rel="noopener noreferrer">
+              <img src={bmcButton} className="h-9" alt="Buy me a coffee" />
             </a>
           </div>
         </main>

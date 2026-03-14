@@ -32,8 +32,10 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useState } from "react";
 import { useConfirm } from "@nobertdev/react-confirm-dialog";
 import { Menu, X } from "lucide-react";
+import bmcButton from "@/assets/bmc-button.png";
 
 const GITHUB_URL = "https://github.com/NOBERT167/react-confirm-dialog";
+const BMC_URL = "https://buymeacoffee.com/nobertdev";
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -601,6 +603,29 @@ function RealWorldSection() {
   );
 }
 
+function SupportSection() {
+  return (
+    <section className="py-16 bg-muted/50">
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        <h2 className="text-2xl font-bold tracking-tight mb-3">
+          Enjoying this library?
+        </h2>
+        <p className="text-muted-foreground max-w-md mx-auto mb-6">
+          If this package saved you time, consider buying me a coffee. It helps
+          keep open-source projects like this maintained and improved.
+        </p>
+        <a href={BMC_URL} target="_blank" rel="noopener noreferrer">
+          <img
+            src={bmcButton}
+            alt="Buy Me A Coffee"
+            className="h-12 mx-auto hover:opacity-80 transition-opacity"
+          />
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="border-t py-8">
@@ -634,6 +659,14 @@ function Footer() {
           >
             npm
           </a>
+          <a
+            href={BMC_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            ☕ Support
+          </a>
         </div>
       </div>
     </footer>
@@ -649,6 +682,7 @@ export default function LandingPage() {
       <FeaturesSection />
       <ExamplesSection />
       <RealWorldSection />
+      <SupportSection />
       <Footer />
     </div>
   );
