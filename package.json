@@ -1,22 +1,32 @@
 {
   "name": "@nobertdev/react-confirm-dialog",
-  "version": "1.1.1",
-  "description": "A lightweight, fully customizable confirmation dialog hook (useConfirm()) that replaces window.confirm() with beautiful async modals. Zero dependencies.",
+  "version": "1.1.6",
+  "description": "A lightweight async confirmation dialog hook for React that replaces window.confirm() with customizable modals.",
+  "author": "Nobert Langat",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "keywords": [
     "react",
+    "react-hook",
     "confirm",
+    "confirmation",
     "dialog",
     "modal",
     "hook",
     "async",
     "confirm-dialog",
-    "useConfirm"
+    "useConfirm",
+    "react-confirm-dialog"
   ],
-  "author": "Nobert Langat",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -24,12 +34,12 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --external react --external react-dom",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch --external react --external react-dom",
-    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "react": ">=17.0.0",
-    "react-dom": ">=17.0.0"
+    "react": ">=17",
+    "react-dom": ">=17"
   },
   "devDependencies": {
     "@types/react": "^18.3.0",
@@ -37,9 +47,12 @@
     "tsup": "^8.0.0",
     "typescript": "^5.4.0"
   },
+  "engines": {
+    "node": ">=16"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NOBERT167/react-confirm-dialog.git"
+    "url": "git+https://github.com/NOBERT167/react-confirm-dialog.git"
   },
   "bugs": {
     "url": "https://github.com/NOBERT167/react-confirm-dialog/issues"

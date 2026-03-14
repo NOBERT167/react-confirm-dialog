@@ -21,6 +21,15 @@ const DEFAULT_STATE: ConfirmDialogState = {
   icon: undefined,
 };
 
+/**
+ * Detect dark mode from the DOM.
+ *
+ * Checks (in order):
+ *  1. `dark` / `light` class on <html>
+ *  2. `data-theme` or `data-mode` attribute on <html>
+ *
+ * Returns `true` (dark), `false` (light) or `null` (no signal found).
+ */
 function detectDarkFromDOM(): boolean | null {
   if (typeof document === "undefined") return null;
   const el = document.documentElement;
@@ -42,18 +51,22 @@ function usePrefersDark(): boolean {
   });
 
   useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
     // Watch for class / attribute changes on <html>
     const observer = new MutationObserver(() => {
       const domDark = detectDarkFromDOM();
-      if (domDark !== null) setDark(domDark);
+      // If the DOM gives an explicit signal, use it.
+      // Otherwise (e.g. `dark` class was removed with no `light` class added),
+      // fall back to the OS-level media query.
+      setDark(domDark ?? mq.matches);
     });
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class", "data-theme", "data-mode"],
     });
 
-    // Fall back to OS-level media query
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    // Also listen for OS-level media query changes
     const mqHandler = (e: MediaQueryListEvent) => {
       if (detectDarkFromDOM() === null) setDark(e.matches);
     };
